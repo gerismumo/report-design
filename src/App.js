@@ -88,9 +88,8 @@ function App() {
   const columnWidth = (doc.internal.pageSize.getWidth()) / 3;
   const startX1 = 10;
   const centerX = doc.internal.pageSize.getWidth() / 2;
-  const startX3 = doc.internal.pageSize.getWidth() - 22;
+  const startX3 = doc.internal.pageSize.getWidth() - 30;
 
-  
   let yPosition = 75; 
   content.forEach(item => {
     doc.setFontSize(12);
@@ -322,14 +321,10 @@ function App() {
   doc.setTextColor(0);
   doc.text(paymentTotal.totalAmount.toFixed(2), startX3, yPosition);
 
-  const addNewPage = (yPosition) => {
-    if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
-      doc.addPage();
-      yPosition = 15; 
-    }
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
   }
-
-  addNewPage(yPosition)
   
 
   const handleClick = () => {
