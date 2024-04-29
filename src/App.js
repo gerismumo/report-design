@@ -5,14 +5,14 @@ const content = [
   { name: "Item 2", quantity: 1, cost: 15.50 },
   { name: "Item 1", quantity: 2, cost: 10.00 },
   { name: "Item 2", quantity: 1, cost: 15.50 },
-  // { name: "Item 1", quantity: 2, cost: 10.00 },
-  // { name: "Item 2", quantity: 1, cost: 15.50 },
-  // { name: "Item 2", quantity: 1, cost: 15.50 },
-  // { name: "Item 1", quantity: 2, cost: 10.00 },
-  // { name: "Item 2", quantity: 1, cost: 15.50 },
-  // { name: "Item 2", quantity: 1, cost: 15.50 },
-  // { name: "Item 1", quantity: 2, cost: 10.00 },
-  // { name: "Item 2", quantity: 1, cost: 15.50 },
+  { name: "Item 1", quantity: 2, cost: 10.00 },
+  { name: "Item 2", quantity: 1, cost: 15.50 },
+  { name: "Item 2", quantity: 1, cost: 15.50 },
+  { name: "Item 1", quantity: 2, cost: 10.00 },
+  { name: "Item 2", quantity: 1, cost: 15.50 },
+  { name: "Item 2", quantity: 1, cost: 15.50 },
+  { name: "Item 1", quantity: 2, cost: 10.00 },
+  { name: "Item 2", quantity: 1, cost: 15.50 },
 ];
 
 const menuItems = [
@@ -100,6 +100,11 @@ function App() {
     doc.text(item.cost.toFixed(2), startX3, yPosition); 
 
     yPosition += 8; 
+
+    if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+      doc.addPage();
+      yPosition = 15; 
+    }
   });
 
   //calculate the total cost
@@ -124,6 +129,11 @@ function App() {
   doc.setTextColor(0);
   doc.text(totals.totalCost.toFixed(2), startX3, yPosition);
 
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
+  }
+
   //menu items
 
   yPosition += 10;
@@ -131,9 +141,18 @@ function App() {
   doc.setFontSize(18);
   doc.setTextColor(0);
   doc.text(menuItemsTitle,10, yPosition);
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
+  }
 
   yPosition += 3;
   doc.line(10, yPosition, doc.internal.pageSize.getWidth() - 10, yPosition);
+
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
+  }
 
   //menu items content
   yPosition += 6;
@@ -145,6 +164,11 @@ function App() {
     doc.text(item.cost.toFixed(2), startX3, yPosition); 
 
     yPosition += 8; 
+
+    if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+      doc.addPage();
+      yPosition = 15; 
+    }
   });
 
   //Tax summary
@@ -153,8 +177,18 @@ function App() {
   doc.setTextColor(0);
   doc.text("Tax Summary",10, yPosition);
 
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
+  }
+
   yPosition += 3;
   doc.line(10, yPosition, doc.internal.pageSize.getWidth() - 10, yPosition);
+
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
+  }
 
   const taxSummaryDetails = [
     {name: "VAT", amount: 446.21},
@@ -169,6 +203,11 @@ function App() {
     doc.text(item.amount.toFixed(2), startX3, yPosition); 
 
     yPosition += 8; 
+
+    if (yPosition >= doc.internal.pageSize.getHeight() - 20) { // Leave some space for margin
+      doc.addPage();
+      yPosition = 15; // Reset yPosition for new page
+    }
   });
 
   yPosition += 3;
@@ -176,8 +215,18 @@ function App() {
   doc.setTextColor(0);
   doc.text("Payment Summary",10, yPosition);
 
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
+  }
+
   yPosition += 3;
   doc.line(10, yPosition, doc.internal.pageSize.getWidth() - 10, yPosition);
+
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
+  }
 
   //payment summary
 
@@ -196,6 +245,11 @@ function App() {
     doc.text(payment.amount.toFixed(2), startX3, yPosition); 
 
     yPosition += 8; 
+
+    if (yPosition >= doc.internal.pageSize.getHeight() - 20) { // Leave some space for margin
+      doc.addPage();
+      yPosition = 15; // Reset yPosition for new page
+    }
   });
 
   function calculatePaymentSummaryTotals(paymentSummaryDetails) {
@@ -216,14 +270,29 @@ function App() {
   doc.setTextColor(0);
   doc.text(paymentTotal.totalAmount.toFixed(2), startX3, yPosition);
 
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
+  }
+
   //User Wise Sales
   yPosition += 10;
   doc.setFontSize(18);
   doc.setTextColor(0);
   doc.text("User Wise Sales",10, yPosition);
 
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
+  }
+
   yPosition += 3;
   doc.line(10, yPosition, doc.internal.pageSize.getWidth() - 10, yPosition);
+
+  if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+    doc.addPage();
+    yPosition = 15; 
+  }
 
   const userWiseSalesDetails = [
     {name: "Abigail Ukumu", quantity: paymentTotal.totalTransactions, amount: paymentTotal.totalAmount},
@@ -238,6 +307,11 @@ function App() {
     doc.text(detail.amount.toFixed(2), startX3, yPosition); 
 
     yPosition += 8; 
+
+    if (yPosition >= doc.internal.pageSize.getHeight() - 20) { // Leave some space for margin
+      doc.addPage();
+      yPosition = 15; 
+    }
   });
 
   //total user User Wise Sales
@@ -247,6 +321,16 @@ function App() {
   doc.text(paymentTotal.totalTransactions.toString(), centerX, yPosition); 
   doc.setTextColor(0);
   doc.text(paymentTotal.totalAmount.toFixed(2), startX3, yPosition);
+
+  const addNewPage = (yPosition) => {
+    if (yPosition >= doc.internal.pageSize.getHeight() - 20) { 
+      doc.addPage();
+      yPosition = 15; 
+    }
+  }
+
+  addNewPage(yPosition)
+  
 
   const handleClick = () => {
     doc.save("report.pdf");
